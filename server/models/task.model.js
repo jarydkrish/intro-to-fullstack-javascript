@@ -1,13 +1,8 @@
 const Sequelize = require('sequelize');
-const sequelize = require('../modules/orm.config');
+const orm = require('../modules/orm.config');
 
-const config = {
-  freezeTableName: true, // Don't use plural for table names
-  underscored: true,  // Use snake_case not camelCase for attributes
-}
-
-// Model for a task
-const Task = sequelize.define('task', {
+// Model for a task, saved in 'task' table
+const Task = orm.define('task', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -20,7 +15,8 @@ const Task = sequelize.define('task', {
   done: {
     type: Sequelize.BOOLEAN, 
     allowNull: false,
-  }
+  },
+  // createdAt and updatedAt automatically generated
 });
 
 module.exports = Task;

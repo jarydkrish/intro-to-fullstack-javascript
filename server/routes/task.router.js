@@ -2,22 +2,28 @@ const express = require('express');
 const Task = require('../models/task.model');
 const router = express.Router();
 
+// GET /tasks/
 router.get('/', (req, res) => {
    console.log('GET tasks');
-   Task.findAll().then(tasks => {
-      res.send(tasks);
-   }).catch(error => {
-      console.log('Error getting all tasks', error);
-      res.sendStatus(500);
-   })
+   Task.findAll()
+      .then(tasks => res.send(tasks))
+      .catch(error => {
+         console.log('Error getting all tasks', error);
+         res.sendStatus(500);
+      })
 });
 
+// POST /tasks/
 router.post('/', (req, res) => {
    console.log(`POST request add new task`, req.body.description);
 
+   // grab the description out of HTTP body, default task to not done
    let newTask = Task.build({
       description: req.body.description,
-      done: false, // default to not being done yet
+      done: false,
+      // id is auto-generated
+      // createdAt is auto-generated
+      // updatedAt is auto-generated
    });
 
    // Save to database
@@ -30,10 +36,14 @@ router.post('/', (req, res) => {
       })
 });
 
+// PUT /tasks/:id
 router.put('/:id', (req, res) => {
+   // grab taskId out of URL and `done` state out of http body
    let taskId = req.params.id;
    let done = req.body.done;
    console.log(`PUT request update task ${taskId}`, req.body);
+
+   // updatedAt is auto-generated
    Task.update({ done: done }, { returning: true, where: { id: taskId } })
       .then(() => res.sendStatus(200))
       .catch(error => {
@@ -42,7 +52,9 @@ router.put('/:id', (req, res) => {
       })
 });
 
+// DELETE /tasks/:id
 router.delete('/:id', (req, res) => {
+   // grab the task id out of the URL
    let taskId = req.params.id;
    console.log(`DELETE request for task ${taskId}`);
    Task.destroy({ where: { id: taskId } })

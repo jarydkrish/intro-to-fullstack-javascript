@@ -12,22 +12,20 @@ const Task = require('./models/task.model');
 
 ////////////////////// Standard Express Set up //////////////////////
 const app = express();
-const bodyParser = require('body-parser');
+const bodyParser = require('body-parser'); // makes http body available on req.body
 
 // Route includes
 const taskRouter = require('./routes/task.router');
 
 // Body parser middleware
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json()); // enables accepting content-type application/json
+app.use(bodyParser.urlencoded({ extended: true })); // enables accepting content-type x-www-form-urlencoded
 
-/* Routes */
-app.use('/tasks', taskRouter);
+// Routes
+app.use('/tasks', taskRouter); // route all requests to /tasks/* to the taskRouter
 
-// App Set //
+// Listen on port 5000 unless PORT is in environment vars
 const PORT = process.env.PORT || 5000;
-
-/** Listen * */
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });

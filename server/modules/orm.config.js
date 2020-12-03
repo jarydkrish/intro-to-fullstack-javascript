@@ -1,13 +1,7 @@
 const Sequelize = require('sequelize');
 
-// Configure Sequelize instance
-let sequelize = null;
-
-if (process.env.DATABASE_URL) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, { operatorsAliases: false });
-} else {
-  console.log('DATABASE_URL environment variable not found');
-}
+// Configure Sequelize instance from DATABASE_URL env variable
+let sequelize = new Sequelize(process.env.DATABASE_URL);
 
 // Optional: Test the connection
 sequelize.authenticate()
