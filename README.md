@@ -1,19 +1,30 @@
-# sequelize intro
-
-This project shows how to use sequelize. To set up, simply create `.env` file with the proper postgres connection string (see `.env.example`) and create your database. The server.js will create all your tables for you if they don't exist.
+# Full Stack JavaScript
 
 This project does not use migration files. It simply flashes the SQL over to the database if the tables don't exist.
 
   - `modules/orm.config.js` sets up postgres and the ORM
-  - `models/` has the `Album` and `Artist` models set up, including the mapping to SQL
+  - `models/task.model.js` has `Task` definition that maps to the database
+  - `routes/task.router.js` has the `/tasks` handlers that support the RESTful CRUD for the task models.
   - `server.js` contains a small function that runs `sync()` to flash over the SQL if the tables don't exist
-  - `routes/` has the `/albums` and `/artists` route handlers that show how to do the RESTful CRUD for the models.
+  - `src/` contains the full react app (from Create React App (CRA))
 
-To run simply `npm start` or `npm run dev` to use nodemon. Don't forget to `npm install`.
+To run the server simply `npm run server` or `npm run dev` to use nodemon. Don't forget to `npm install`.
+To run the webpack client (React) run `npm run client`. 
 
-The `.env` file should contain your local auth information. This should work with heroku too.
+`npm start` is meant to be used on Heroku and will start the node server *and* build the react app into the `build/` folder,
+which is ready to be served out by the express static server.
 
-.env
+### .env file (database config)
+
+The `.env` file should contain your local auth information. This should work with heroku too. You can even 
+use SQLite3 instead of postgres (but still support postgres on Heroku because Heroku does not support SQLite)
+
+.env w/ Postgres
 ```
 DATABASE_URL=postgres://username:password@localhost:5432/db_name
+```
+
+.env w/ SQLite
+```
+DATABASE_URL=sqlite://tasks.db
 ```
