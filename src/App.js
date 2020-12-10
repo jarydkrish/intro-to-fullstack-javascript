@@ -1,23 +1,13 @@
-import './App.css';
-import axios from 'axios';
+import { Component } from 'react';
+import TaskTable from './TaskTable/TaskTable.jsx';
 
-const getTasks = async () => {
-  try {
-    let response = await axios.get('/tasks');
-    console.log(response.data);
-  } catch (error) {
-    alert(error);
+class App extends Component {
+  render = () => {
+    return <main className='container'>
+      <h1>My ToDo App</h1>
+      My Tasks:
+      <TaskTable/>
+    </main>
   }
-
 }
-
-function App() {
-  getTasks();
-  return (
-    <div className="App">
-      <h1>Hello World</h1>
-    </div>
-  );
-}
-
 export default App;

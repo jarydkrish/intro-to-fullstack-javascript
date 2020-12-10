@@ -5,7 +5,6 @@ const router = express.Router();
 // GET /tasks/
 router.get('/', (req, res) => {
    console.log('GET tasks');
-   res.sendStatus(500);
    Task.findAll()
       .then(tasks => res.send(tasks))
       .catch(error => {
