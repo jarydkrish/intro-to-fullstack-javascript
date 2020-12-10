@@ -5,7 +5,16 @@ const router = express.Router();
 // GET /tasks/
 router.get('/', (req, res) => {
    console.log('GET tasks');
-   Task.findAll()
+   Task.findAll(
+      // configuration option with order key
+      { 
+         // order needs an array of key/value strings that
+         // get translated to SQL ORDER BY commands
+         order: [
+            ['done', 'DESC'], 
+            ['createdAt', 'ASC']
+         ]
+      })
       .then(tasks => res.send(tasks))
       .catch(error => {
          console.log('Error getting all tasks', error);

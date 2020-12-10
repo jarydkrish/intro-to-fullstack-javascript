@@ -26,9 +26,9 @@ class TaskTable extends Component {
          <table>
             <thead>
                <tr>
+                  <td></td>
                   <td>Description</td>
-                  <td>Status</td>
-                  <td>Timestamp</td>
+                  <td>Created</td>
                </tr>
             </thead>
             <tbody>

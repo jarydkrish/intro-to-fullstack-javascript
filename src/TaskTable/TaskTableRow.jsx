@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Component } from 'react';
 import { deleteTask, setTaskStatus } from '../utils/api';
+import moment from 'moment';
 
 class TaskRow extends Component {
    handleClick = async (taskId) => {
@@ -18,11 +19,13 @@ class TaskRow extends Component {
       return <>
          <tr>
             <td>
-               <input type="checkbox" checked={task.done} onChange={(event) => this.handleCheckbox(task.id, event.target.checked)}></input>
+               <input 
+                  type="checkbox" 
+                  checked={task.done} 
+                  onChange={(event) => this.handleCheckbox(task.id, event.target.checked)}></input>
             </td>
             <td>{task.description}</td>
-            <td>{task.done ? 'yes' : 'no'}</td>
-            <td>{task.createdAt}</td>
+            <td>{moment(task.createdAt).fromNow()}</td>
             <td><button onClick={() => this.handleClick(task.id)}>Delete</button></td>
          </tr>
       </>
