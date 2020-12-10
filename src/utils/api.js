@@ -16,9 +16,9 @@ export const deleteTask = async (taskId) => {
    }
 }
 
-export const createTask = async (newTask) => {
+export const createTask = async (description) => {
    try {
-      await axios.post(`/tasks/`, newTask);
+      await axios.post(`/tasks/`, { description: description });
    } catch (error) {
       alert(error);
    }
