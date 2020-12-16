@@ -17,17 +17,17 @@ const TaskForm = (props) => {
    }
 
    return <>
-      <h2 class="mt-3">New Task</h2>
-      <form onSubmit={onSubmit} class="form-inline mb-3">
+      <h2 className="mt-3">New Task</h2>
+      <form onSubmit={onSubmit} className="form-inline mb-3">
          <input
             placeholder="Take out the trash"
-            class="form-control col"
+            className="form-control col"
             name="task-description"
             autoComplete="off"
             value={description}
             onChange={(event) => setDescription(event.target.value)}
          />
-         <button class="btn btn-outline-primary" type="submit">
+         <button className="btn btn-outline-primary" type="submit">
             {plusIcon} Create Task
             </button>
       </form>
