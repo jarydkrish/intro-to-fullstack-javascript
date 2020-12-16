@@ -1,7 +1,9 @@
 const Sequelize = require('sequelize');
 
 // Configure Sequelize instance from DATABASE_URL env variable
-let sequelize = new Sequelize(process.env.DATABASE_URL);
+// Default to an in-memory database if DATABASE_URL is not found
+if (!process.env.DATABASE_URL) console.log('DATABASE_URL not found, defaulting to sqlite://:memory in-memory database');
+let sequelize = new Sequelize(process.env.DATABASE_URL || 'sqlite://:memory');
 
 // Optional: Test the connection
 sequelize.authenticate()
