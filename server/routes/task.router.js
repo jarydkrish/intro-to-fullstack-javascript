@@ -38,7 +38,7 @@ router.post('/', (req, res) => {
    // Save to database
    newTask.save()
       // .then((task) => res.sendStatus(200))
-      .then(() => res.sendStatus(200))
+      .then(() => res.sendStatus(201))
       .catch(error => {
          console.log('Error saving task', error);
          res.sendStatus(500);
@@ -67,7 +67,7 @@ router.delete('/:id', (req, res) => {
    let taskId = req.params.id;
    console.log(`DELETE request for task ${taskId}`);
    Task.destroy({ where: { id: taskId } })
-      .then(() => res.sendStatus(200))
+      .then(() => res.sendStatus(204))
       .catch(error => {
          console.log('Error deleting task', error);
          res.sendStatus(500);
