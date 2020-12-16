@@ -16,7 +16,6 @@ const TaskTableRow = (props) => {
    }
 
    const { task } = props;
-   
    return <>
       <tr
          key={`task-${task.id}`}

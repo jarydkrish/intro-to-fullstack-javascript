@@ -1,47 +1,44 @@
-import axios from 'axios';
-import { Component } from 'react';
-import TaskRow from './TaskTableRow';
+import { React, useState, useEffect } from 'react';
 import { getTasks } from '../utils/api';
 import TaskForm from './TaskForm';
+import TaskRow from './TaskTableRow';
 
-class TaskTable extends Component {
-   state = {
-      tasks: []
+const TaskTable = () => {
+   const [tasks, setTasks] = useState([]);
+
+   const refreshTasks = async () => {
+      try {
+         const tasks = await getTasks();
+         setTasks(tasks);
+      } catch {
+         alert(`Can't get tasks from server`);
+      }
    }
 
-   refreshTasks = async () => {
-      const tasks = await getTasks();
-      this.setState({
-         tasks: tasks
-      })
-   }
+   // Call refreshTasks on component mount with no dependencies
+   useEffect(refreshTasks, []);
 
-   componentDidMount = () => {
-      this.refreshTasks();
-   }
-
-   render = () => {
-      return <>
-         <TaskForm getTasks={this.refreshTasks} />
-         <h2>Current Tasks:</h2>
-         <p>
-            There are <span class="text-success">{this.state.tasks.length}</span> total tasks, 
-            including <span class="text-danger">{this.state.tasks.filter(task => !task.done).length}</span> that are incomplete.
-         </p>
-         <table class="table table-sm table-striped table-bordered bg-light">
-            <thead class="thead-dark">
-               <tr>
-                  <th width='5%'></th>
-                  <th width='70%'>Description</th>
-                  <th width='20%'>Created</th>
-                  <th width='5%'></th>
-               </tr>
-            </thead>
-            <tbody>
-               {this.state.tasks.map( task => <TaskRow task={task} refreshTasks={this.refreshTasks} />)}
-            </tbody>
-         </table>
-      </>
-   }
+   return <>
+      <TaskForm getTasks={refreshTasks} />
+      <h2>Current Tasks:</h2>
+      <p>
+         There are <span class="text-success">{tasks.length}</span> total tasks,
+         including <span class="text-danger">{tasks.filter(task => !task.done).length}</span> that are incomplete.
+      </p>
+      <table class="table table-sm table-striped table-bordered bg-light">
+         <thead class="thead-dark">
+            <tr>
+               <th width='5%'></th>
+               <th width='70%'>Description</th>
+               <th width='20%'>Created</th>
+               <th width='5%'></th>
+            </tr>
+         </thead>
+         <tbody>
+            {tasks.map(task => <TaskRow task={task} refreshTasks={refreshTasks} />)}
+         </tbody>
+      </table>
+   </>
 }
+
 export default TaskTable;

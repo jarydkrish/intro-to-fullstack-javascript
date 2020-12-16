@@ -7,12 +7,14 @@ const TaskForm = (props) => {
    
    const onSubmit = async (event) => {
       event.preventDefault();
-      console.log(description);
-      await createTask(description);
-      setDescription('');
-      props.getTasks();
+      try {
+         await createTask(description);
+         props.getTasks();
+         setDescription('');
+      } catch {
+         alert(`Can't create `)
+      }
    }
-   console.log(description);
 
    return <>
       <h2 class="mt-3">New Task</h2>
@@ -21,6 +23,7 @@ const TaskForm = (props) => {
             placeholder="Take out the trash"
             class="form-control col"
             name="task-description"
+            autoComplete="off"
             value={description}
             onChange={(event) => setDescription(event.target.value)}
          />
