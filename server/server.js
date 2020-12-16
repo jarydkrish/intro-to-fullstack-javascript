@@ -1,5 +1,5 @@
 const express = require('express');
-require('dotenv').config();
+require('dotenv').config(); // pull in environment variables
 
 //////////////////// Set up our database ORM :) ////////////////////
 // Database init - create Tables if not there. Migration files are better but this works for now.

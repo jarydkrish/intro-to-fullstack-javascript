@@ -9,10 +9,10 @@ const TaskForm = (props) => {
       event.preventDefault();
       try {
          await createTask(description);
-         props.getTasks();
+         props.refreshTasks();
          setDescription('');
       } catch {
-         alert(`Can't create `)
+         alert(`Can't create a new task :(`)
       }
    }
 

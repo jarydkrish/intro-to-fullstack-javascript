@@ -11,7 +11,7 @@ const TaskTable = () => {
          const tasks = await getTasks();
          setTasks(tasks);
       } catch {
-         alert(`Can't get tasks from server`);
+         alert(`Can't get tasks from server :(`);
       }
    }
 
@@ -19,7 +19,7 @@ const TaskTable = () => {
    useEffect(refreshTasks, []);
 
    return <>
-      <TaskForm getTasks={refreshTasks} />
+      <TaskForm refreshTasks={refreshTasks} />
       <h2>Current Tasks:</h2>
       <p>
          There are <span class="text-success">{tasks.length}</span> total tasks,

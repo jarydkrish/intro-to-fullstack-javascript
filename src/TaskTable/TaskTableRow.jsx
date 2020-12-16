@@ -5,14 +5,21 @@ import TaskTable from './TaskTable';
 
 const TaskTableRow = (props) => {
    const handleClick = async (taskId) => {
-      await deleteTask(taskId);
-      props.refreshTasks();
+      try {
+         await deleteTask(taskId);
+         props.refreshTasks();
+      } catch {
+         alert(`Can't update tasks :(`);
+      }
    }
    
    const handleCheckbox = async (taskId, doneStatus) => {
-      // console.log(doneStatus);
-      await setTaskStatus(taskId, doneStatus);
-      props.refreshTasks();
+      try {
+         await setTaskStatus(taskId, doneStatus);
+         props.refreshTasks();
+      } catch {
+         alert(`Can't update tasks :(`);
+      }
    }
 
    const { task } = props;
