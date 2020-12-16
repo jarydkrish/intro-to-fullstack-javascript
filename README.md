@@ -6,6 +6,7 @@ This project does not use migration files. It simply flashes the SQL over to the
 This project uses Sequelize, which means that we can use SQLite or PostgreSQL and seamlessly switch between the two. 
 See the note below on setting up your `.env` file for either database. SQLite is convenient since nothing has to 
 be installed on your machine to get up and running (SQLite is backed by a file rather than a full database server).
+If DATABASE_URL is not found, we default to an in-memory database instead of a file-backed database (see `orm.config.js`)
 
 Sequelize will create our table structure for us with `CREATE IF NOT EXISTS` by running `Model.sync()` (see `server.js`)
 
@@ -44,7 +45,7 @@ A task looks like this:
         "done": false,
         "createdAt": "2020-12-16T21:49:58.056Z",
         "updatedAt": "2020-12-16T21:49:58.056Z"
-    }
+}
 ```
 
 The React app expects be able to perform RESTful CRUD operations (Create/Read/Update/Delete) using 

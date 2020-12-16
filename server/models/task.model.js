@@ -1,7 +1,17 @@
 const Sequelize = require('sequelize');
 const orm = require('../modules/orm.config');
 
-// Model for a task, saved in 'task' table
+// Model for a task, saved in 'task' table.
+// Task should look like:
+/*
+{
+  "id": 28,
+  "description": "Take out the trash",
+  "done": false,
+  "createdAt": "2020-12-16T21:49:58.056Z",
+  "updatedAt": "2020-12-16T21:49:58.056Z"
+}
+*/
 const Task = orm.define('task', {
   id: {
     type: Sequelize.INTEGER,
