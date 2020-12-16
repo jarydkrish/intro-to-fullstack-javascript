@@ -22,11 +22,11 @@ const TaskTable = () => {
       <TaskForm refreshTasks={refreshTasks} />
       <h2>Current Tasks:</h2>
       <p>
-         There are <span class="text-success">{tasks.length}</span> total tasks,
-         including <span class="text-danger">{tasks.filter(task => !task.done).length}</span> that are incomplete.
+         There are <span className="text-success">{tasks.length}</span> total tasks,
+         including <span className="text-danger">{tasks.filter(task => !task.done).length}</span> that are incomplete.
       </p>
-      <table class="table table-sm table-striped table-bordered bg-light">
-         <thead class="thead-dark">
+      <table className="table table-sm table-striped table-bordered bg-light">
+         <thead className="thead-dark">
             <tr>
                <th width='5%'></th>
                <th width='70%'>Description</th>

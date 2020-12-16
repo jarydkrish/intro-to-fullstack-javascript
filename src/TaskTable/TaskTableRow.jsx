@@ -27,16 +27,16 @@ const TaskTableRow = (props) => {
       <tr
          key={`task-${task.id}`}
          className={(task.done ? 'bg-success text-white' : '')}>
-         <td class="align-middle text-center">
+         <td className="align-middle text-center">
             <button
                className={`btn btn-lg shadow-none ${task.done ? 'text-white' : ''}`}
                onClick={(() => handleCheckbox(task.id, !task.done))}>
                {task.done ? checkboxCompleteIcon : checkboxEmptyIcon}
             </button>
          </td>
-         <td class="align-middle">{task.description}</td>
-         <td class="align-middle">{moment(task.createdAt).fromNow()}</td>
-         <td class="align-middle text-center">
+         <td className="align-middle">{task.description}</td>
+         <td className="align-middle">{moment(task.createdAt).fromNow()}</td>
+         <td className="align-middle text-center">
             <button
                className={'btn btn-sm btn-danger'}
                onClick={() => handleClick(task.id)}>
