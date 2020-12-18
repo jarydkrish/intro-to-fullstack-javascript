@@ -16,11 +16,7 @@ router.get('/', async (req, res) => {
 // POST /tasks/
 router.post('/', async (req, res) => {
   try {
-    const { description } = req.body;
-    const task = await Task.create({
-      description,
-      done: false,
-    });
+    const task = await Task.create(req.body);
     res.status(201).send(task);
   } catch (error) {
     console.error(error);
@@ -37,11 +33,8 @@ router.put('/:id', async (req, res) => {
       res.sendStatus(404);
       return;
     }
-    const { description, done } = req.body;
-    task.description = description;
-    task.done = done;
-    await task.save();
-    res.send(task);
+    const updatedTask = await task.update(req.body);
+    res.send(updatedTask);
   } catch (error) {
     console.error(error);
     res.sendStatus(500);

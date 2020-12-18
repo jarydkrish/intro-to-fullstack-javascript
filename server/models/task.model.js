@@ -19,12 +19,13 @@ const Task = orm.define('task', {
     primaryKey: true
   },
   description: {
-    type: Sequelize.STRING, 
+    type: Sequelize.STRING,
     allowNull: false
   },
   done: {
-    type: Sequelize.BOOLEAN, 
+    type: Sequelize.BOOLEAN,
     allowNull: false,
+    defaultValue: false,
   },
   // createdAt and updatedAt automatically generated
 });
