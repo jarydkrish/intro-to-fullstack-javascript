@@ -14,7 +14,7 @@ const app = express();
 const bodyParser = require('body-parser'); // makes http body available on req.body
 
 // Route includes
-// const taskRouter = require('./routes/task.router'); // TODO uncomment this
+const taskRouter = require('./routes/task.router'); // TODO uncomment this
 
 // Body parser middleware
 app.use(bodyParser.json()); // enables accepting content-type application/json
@@ -23,7 +23,7 @@ app.use(express.static("build/")); // serve out anything you find in the build/ 
 
 // Routes
 // route all requests to /tasks/* to the taskRouter
-// app.use('/tasks', taskRouter); // TODO: uncomment this
+app.use('/tasks', taskRouter); // TODO: uncomment this
 
 // Listen on port 5000 unless PORT is in environment vars (heroku)
 const PORT = process.env.PORT || 5000;
