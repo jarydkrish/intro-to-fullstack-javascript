@@ -5,7 +5,6 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "react-scripts build && node server/server.js",
     "start": "node server/server.js",
     "server": "nodemon --watch server/ server/server.js",
     "test": "react-scripts test",
