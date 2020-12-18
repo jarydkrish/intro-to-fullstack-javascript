@@ -1,10 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 require('dotenv').config(); // pull in environment variables
 
 //////////////////// Set up our database ORM :) ////////////////////
 // Database init - create Tables if not there. Migration files are better but this works for now.
-// if we dont await for the each .sync(), subsequent dependent .sync() calls may 
-// crash initially  because the earlier tables are not done being created. 
+// if we dont await for the each .sync(), subsequent dependent .sync() calls may
+// crash initially  because the earlier tables are not done being created.
 // this is an anonymous async arrow function that just gets immediately invoked then discarded
 const Task = require('./models/task.model');
 (async () => await Task.sync())();
@@ -16,6 +17,8 @@ const bodyParser = require('body-parser'); // makes http body available on req.b
 // Route includes
 const taskRouter = require('./routes/task.router'); // TODO uncomment this
 
+// cors
+app.use(cors());
 // Body parser middleware
 app.use(bodyParser.json()); // enables accepting content-type application/json
 app.use(bodyParser.urlencoded({ extended: true })); // enables accepting content-type x-www-form-urlencoded
