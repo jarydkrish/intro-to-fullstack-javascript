@@ -5,7 +5,7 @@ const router = express.Router();
 // GET /tasks/
 router.get('/', async (req, res) => {
   try {
-    const tasks = await Task.findAll();
+    const tasks = await Task.findAll({ order: [['id', 'ASC']] });
     res.send(tasks);
   } catch (error) {
     console.error(error);
